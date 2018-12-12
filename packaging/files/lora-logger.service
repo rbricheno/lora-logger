@@ -7,7 +7,7 @@ After=network-online.target
 [Service]
 User=loralogger
 Group=loralogger
-ExecStart=/usr/bin/lora-logger
+ExecStart=/usr/bin/loralogger
 Restart=on-failure
 
 [Install]

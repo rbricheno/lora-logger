@@ -1,12 +1,15 @@
 package loralogger
 
 import (
+	"bytes"
 	"encoding/base64"
 	"net"
 	"sync"
+	"time"
 
 	"github.com/pkg/errors"
 	log "github.com/sirupsen/logrus"
+	"github.com/utahta/go-cronowriter"
 )
 
 type udpPacket struct {
@@ -14,12 +17,7 @@ type udpPacket struct {
 	data []byte
 }
 
-type gateway struct {
-	addr *net.UDPAddr
-	//conn *net.UDPConn
-}
-
-// LoraLogger forwards packet-forwarder UDP data to multiple backends.
+// LoraLogger logs UDP packets
 type LoraLogger struct {
 	sync.RWMutex
 	wg sync.WaitGroup
@@ -29,7 +27,7 @@ type LoraLogger struct {
 	closed bool
 
 	//backends map[string]map[string]*net.UDPConn // [backendHost][gatewayID]UDPConn
-	gateways map[string]*net.UDPAddr          // [gatewayID]UDPAddr
+	gateways map[string]*net.UDPAddr // [gatewayID]UDPAddr
 }
 
 // New creates a new loralogger.
@@ -146,5 +144,17 @@ func (m *LoraLogger) handleUplinkPacket(up udpPacket) error {
 		"gateway_id":  gatewayID,
 		"packet_type": pt,
 	}).Info("*TODO* this is where we would log the packet")
+
+	w := cronowriter.MustNew("/var/log/loralogger/%Y/%m/%d/lora.log")
+
+	buffer := bytes.Buffer{}
+	buffer.WriteString(time.Now().Format(time.RFC3339))
+	buffer.WriteString(", ")
+	buffer.WriteString(up.addr.String())
+	buffer.WriteString(", ")
+	buffer.WriteString(base64.StdEncoding.EncodeToString(up.data))
+
+	w.Write([]byte(buffer.String()))
+
 	return nil
 }

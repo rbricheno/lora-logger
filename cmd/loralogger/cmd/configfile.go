@@ -23,37 +23,6 @@ log_level={{ .General.LogLevel }}
 # The interface:port on which the lora-logger will bind for receiving
 # data from the packet-forwarder (UDP data).
 bind="{{ .LoraLogger.Bind }}"
-
-
-# Backends
-#
-# The backends to which the lora-logger will forward the
-# packet-forwarder UDP data.
-#
-# Example:
-# [[lora_logger.backend]]
-# # Host
-# #
-# # The host:IP of the backend.
-# host="192.16.1.5:1700"
-# 
-# # Gateway IDs
-# #
-# # The Gateway IDs to forward data for.
-# gateway_ids = [
-#   "0101010101010101",
-#   "0202020202020202",
-# ]
-{{ range $index, $element := .LoraLogger.Backends }}
-[[lora_logger.backend]]
-host="{{ $element.Host }}"
-
-gateway_ids = [
-{{ range $index, $element := $element.GatewayIDs -}}
-  "{{ $element }}",
-{{ end -}}
-]
-{{ end }}
 `
 
 var configCmd = &cobra.Command{

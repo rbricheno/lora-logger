@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-NAME=lora-logger
+NAME=loralogger
 BIN_DIR=/usr/bin
 SCRIPT_DIR=/usr/lib/$NAME/scripts
 LOG_DIR=/var/log/$NAME

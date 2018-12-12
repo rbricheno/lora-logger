@@ -3,7 +3,7 @@ VERSION := $(shell git describe --always |sed -e "s/^v//")
 
 build:
 	mkdir -p build
-	go build -ldflags "-s -w -X main.version=$(VERSION)" -o build/lora-logger cmd/lora-logger/main.go
+	go build -ldflags "-s -w -X main.version=$(VERSION)" -o build/loralogger cmd/loralogger/main.go
 
 clean:
 	rm -rf build

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-NAME=lora-logger
+NAME=loralogger
 
 function remove_systemd {
 	systemctl stop $NAME

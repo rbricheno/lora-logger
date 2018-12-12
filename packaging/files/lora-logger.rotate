@@ -1,4 +1,4 @@
-/var/log/lora-logger/lora-logger.log {
+/var/log/loralogger/loralogger.log {
     daily
     rotate 7
     missingok

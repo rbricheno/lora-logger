@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 ### BEGIN INIT INFO
-# Provides:          lora-logger
+# Provides:          loralogger
 # Required-Start:    $all
 # Required-Stop:     $remote_fs $syslog
 # Default-Start:     2 3 4 5
@@ -9,7 +9,7 @@
 ### END INIT INFO
 
 
-NAME=lora-logger
+NAME=loralogger
 DESC="LoRa Logger"
 DAEMON_USER=loralogger
 DAEMON_GROUP=loralogger

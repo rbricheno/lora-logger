@@ -51,22 +51,7 @@ func (ts *LoraLoggerTestSuite) SetupTest() {
 	assert.NoError(err)
 
 	ts.mp, err = New(Config{
-		Bind: "127.0.0.1:1800",
-		Backends: []BackendConfig{
-			{
-				Host: "127.0.0.1:1801",
-				GatewayIDs: []string{
-					"0101010101010101",
-					"0202020202020202",
-				},
-			},
-			{
-				Host: "127.0.0.1:1802",
-				GatewayIDs: []string{
-					"0202020202020202",
-				},
-			},
-		},
+		Bind: "127.0.0.1:1950",
 	})
 	assert.NoError(err)
 }
