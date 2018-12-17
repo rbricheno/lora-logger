@@ -30,7 +30,7 @@ func init() {
 
 	viper.BindPFlag("general.log_level", rootCmd.PersistentFlags().Lookup("log-level"))
 
-	viper.SetDefault("packet_multiplexer.bind", "0.0.0.0:1700")
+	viper.SetDefault("loralogger.bind", "0.0.0.0:1950")
 
 	rootCmd.AddCommand(versionCmd)
 	rootCmd.AddCommand(configCmd)
