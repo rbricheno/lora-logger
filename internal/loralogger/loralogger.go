@@ -143,7 +143,7 @@ func (m *LoraLogger) handleUplinkPacket(up udpPacket) error {
 		"from_addr":   up.addr,
 		"gateway_id":  gatewayID,
 		"packet_type": pt,
-	}).Info("*TODO* this is where we would log the packet")
+	}).Info("Logging packet to text file")
 
 	w := cronowriter.MustNew("/var/log/loralogger/%Y/%m/%d/lora.log")
 
@@ -153,6 +153,7 @@ func (m *LoraLogger) handleUplinkPacket(up udpPacket) error {
 	buffer.WriteString(up.addr.String())
 	buffer.WriteString(", ")
 	buffer.WriteString(base64.StdEncoding.EncodeToString(up.data))
+	buffer.WriteString("\n")
 
 	w.Write([]byte(buffer.String()))
 
