@@ -150,7 +150,7 @@ func (m *LoraLogger) handleUplinkPacket(up udpPacket) error {
 	buffer := bytes.Buffer{}
 	buffer.WriteString(time.Now().Format(time.RFC3339))
 	buffer.WriteString(", ")
-	buffer.WriteString(up.addr.String())
+	buffer.WriteString(gatewayID)
 	buffer.WriteString(", ")
 	buffer.WriteString(base64.StdEncoding.EncodeToString(up.data))
 	buffer.WriteString("\n")
